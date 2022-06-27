@@ -1,6 +1,10 @@
 const redux = require("redux");
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+// adding middleware
+const applyMiddleware = redux.applyMiddleware;
+const createLogger = require("redux-logger").createLogger;
+const logger = createLogger();
 
 // define action types as constants. This prevents spelling mistakes. A practise followed in code bases
 const ORDER_CAKE = "ORDER_CAKE";
@@ -91,15 +95,16 @@ const rootReducer = combineReducers({
   iceCream: iceCreamReducer,
 });
 // Step 1: create a store
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 
 //Step 2: check for initial state (optional)
 console.log("Initial State", store.getState());
 
 //Step 3: Subscribe the listeners to keep track of changes in the store/state
-const unsubscribe = store.subscribe(() =>
-  console.log("State is Updated :", store.getState())
-);
+// const unsubscribe = store.subscribe(() =>
+//   console.log("State is Updated :", store.getState())
+// );
+const unsubscribe = store.subscribe(() => {});
 
 //Step 4: dispatch the actions that the reducer has to execute
 store.dispatch(orderCake(2));
