@@ -89,6 +89,7 @@ const fetchUsers = () => {
       });
   };
 };
+
 // In the above fn, a fn with dispatch as its arg is being returned bcz store.dispatch() fn provides the dispatch fn. Hence you are using it to perform several async actions within a function body.
 
 // Its similar to the below fn, but we are extracting out that logic and returning it via another function. This keeps code clean, modular and that same dispatching actions can be used in other places if necessary, thereby encouraging DRY principle of coding.
