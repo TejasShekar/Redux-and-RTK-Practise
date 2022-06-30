@@ -66,22 +66,6 @@ const reducer = (state = initialState, {type, payload}) => {
   }
 };
 
-// create a async action
-const fetchUsers = () => {
-  return function (dispatch) {
-    dispatch(fetchUsersRequest());
-    axios
-      .get("https://jsonplaceholder.typicode.com/users1")
-      .then((res) => {
-        const userData = res.data;
-        dispatch(fetchUsersSuccess(userData));
-      })
-      .catch((err) => {
-        dispatch(fetchUsersFailed(err.message));
-      });
-  };
-};
-
 // create store and add redux thunk as middleware
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
@@ -89,6 +73,38 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 store.subscribe(() => {
   console.log(store.getState());
 });
+
+// create a async action and dispatcher function
+const fetchUsers = () => {
+  return function (dispatch) {
+    dispatch(fetchUsersRequest());
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res) => {
+        const userData = res.data.map((user) => user.name);
+        dispatch(fetchUsersSuccess(userData));
+      })
+      .catch((err) => {
+        dispatch(fetchUsersFailed(err.message));
+      });
+  };
+};
+// In the above fn, a fn with dispatch as its arg is being returned bcz store.dispatch() fn provides the dispatch fn. Hence you are using it to perform several async actions within a function body.
+
+// Its similar to the below fn, but we are extracting out that logic and returning it via another function. This keeps code clean, modular and that same dispatching actions can be used in other places if necessary, thereby encouraging DRY principle of coding.
+
+// store.dispatch((dispatch) => {
+//   dispatch(fetchUsersRequest());
+//   axios
+//     .get("https://jsonplaceholder.typicode.com/users")
+//     .then((res) => {
+//       const userData = res.data;
+//       dispatch(fetchUsersSuccess(userData));
+//     })
+//     .catch((err) => {
+//       dispatch(fetchUsersFailed(err.message));
+//     });
+// });
 
 // dispatch the async action
 store.dispatch(fetchUsers());
