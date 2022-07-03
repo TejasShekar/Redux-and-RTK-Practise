@@ -12,7 +12,8 @@ const store = configureStore({
     user: userReducer,
   },
   // configureStore applies a few middleware by default. So, we get all those middleware via getDefaultMiddleware and add our middlewares to it using concat().
-  // commented out the middleware for adding asyncThunk as middleware
+  // commented out the middleware for adding asyncThunk as middleware.
+
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(reduxLogger),
 });
