@@ -1,3 +1,8 @@
-.App {
+*,
+*::after,
+*::before {
+  padding: 2px;
+  /* margin: 2px; */
+  box-sizing: border-box;
   text-align: center;
 }
