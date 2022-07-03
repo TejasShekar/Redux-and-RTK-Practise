@@ -11,6 +11,8 @@ const cakeSlice = createSlice({
   name: "cake",
   initialState,
   reducers: {
+    // notice that we are doing mutating state updates here instead of pure state updates. This is bcz RTK has immer built into it and hence immer will take care of mutating state updates on behalf of us.
+    // This helps us write less and clean code.
     ordered: (state, action) => {
       state.noOfCakes -= action.payload;
     },
