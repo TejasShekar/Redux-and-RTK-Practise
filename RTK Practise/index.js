@@ -10,11 +10,11 @@ const unsubscribe = store.subscribe(() => {
 
 store.dispatch(fetchUsers());
 
-// store.dispatch(cakeActions.ordered(3));
-// store.dispatch(cakeActions.restocked(3));
-// store.dispatch(iceCreamActions.ordered(3));
-// store.dispatch(iceCreamActions.ordered(3));
-// store.dispatch(iceCreamActions.ordered(3));
-// store.dispatch(iceCreamActions.restocked(9));
+store.dispatch(cakeActions.ordered(3));
+store.dispatch(cakeActions.restocked(3));
+store.dispatch(iceCreamActions.ordered(3));
+store.dispatch(iceCreamActions.ordered(3));
+store.dispatch(iceCreamActions.ordered(3));
+store.dispatch(iceCreamActions.restocked(9));
 
-// unsubscribe();
+unsubscribe();
